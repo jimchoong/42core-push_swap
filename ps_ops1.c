@@ -16,7 +16,7 @@ int	add_op(t_stacks *stacks, char *op)
 		s = ft_strjoin(stacks->ops, op);
 		if (!s)
 			return (0);
-		free(stacks->ops);	
+		free(stacks->ops);
 	}
 	stacks->ops = s;
 	return (1);
@@ -137,20 +137,19 @@ int	rra(t_stacks *stacks)
 		return (0);
 	tmp = stacks->a->btm;
 	trav = stacks->a->top->next;
-	while (trav)
-	{
-		if (!trav->next)
-			break;
-		if (trav->next == tmp)
-			break;
-	}
 	if (trav == tmp)
 		return (sa(stacks));
+	while (trav)
+	{
+		if (trav->next == tmp)
+			break ;
+		trav = trav->next;
+	}
 	trav->next = NULL;
 	tmp->next = stacks->a->top;
 	stacks->a->top = tmp;
 	stacks->a->btm = trav;
-	return (1);	
+	return (1);
 }
 
 int	rrb(t_stacks *stacks)
@@ -164,20 +163,19 @@ int	rrb(t_stacks *stacks)
 		return (0);
 	tmp = stacks->b->btm;
 	trav = stacks->b->top->next;
+	if (trav == tmp)
+		return (sb(stacks));
 	while (trav)
 	{
-		if (!trav->next)
-			break;
 		if (trav->next == tmp)
-			break;
+			break ;
+		trav = trav->next;
 	}
-	if (trav == tmp)
-		return (sa(stacks));
 	trav->next = NULL;
 	tmp->next = stacks->b->top;
 	stacks->b->top = tmp;
 	stacks->b->btm = trav;
-	return (1);	
+	return (1);
 }
 
 int	rrr(t_stacks *stacks)
@@ -191,10 +189,10 @@ int	rrr(t_stacks *stacks)
 	rrb = rrb(stacks);
 	if (!rrb)
 		ra(stacks);
-	return (rra * rrb);	
+	return (rra * rrb);
 }
 
-int rr(t_stacks *stacks)
+int	rr(t_stacks *stacks)
 {
 	int	ra;
 	int	rb;

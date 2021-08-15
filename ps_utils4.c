@@ -46,15 +46,17 @@ static void	print_stacks_h(t_stacks *stacks)
 */
 void	print_stacks(t_stacks *stacks)
 {
+	int			i;
 	t_stack_e	*a;
 	t_stack_e	*b;
 
+	i = 0;
 	a = stacks->a->top;
 	b = stacks->b->top;
-	printf("%-10c\tB\n", 'A');
+	printf("%-10c\t%-10c\n", 'A', 'B');
 	while (i++ < stacks->stack_len && a && b)
 	{
-		printf("%-10i\t%i\n", a->val,b->val);
+		printf("%-10i\t%-10i\n", a->val, b->val);
 		a = a->next;
 		b = b->next;
 	}
