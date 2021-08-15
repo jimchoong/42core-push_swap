@@ -28,6 +28,8 @@ void	free_stacks(t_stacks *stacks)
 			free_stack(stacks->a);
 		if (stacks->b)
 			free_stack(stacks->b);
+		if (stacks->ops)
+			free(stacks->ops);
 	}
 	free(stacks);
 }

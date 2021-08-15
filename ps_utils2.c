@@ -59,14 +59,6 @@ static int	make_stacks(t_stacks *stacks, char *argv[])
 			return (0);
 		append_back(stacks->a, el);
 	}
-	i = -1;
-	while (++i < stacks->stack_len)
-	{
-		el = new_e(0);
-		if (!el)
-			return (0);
-		append_back(stacks->b, el);
-	}
 	return (1);
 }
 
@@ -87,6 +79,7 @@ t_stacks	*init_stacks(int argc, char *argv[])
 		return (NULL);
 	}
 	stacks->stack_len = argc;
+	stacks->ops = NULL;
 	if (!make_stacks(stacks, argv))
 	{
 		free_stacks(stacks);
