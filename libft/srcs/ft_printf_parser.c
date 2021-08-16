@@ -1,3 +1,4 @@
+#include "ft_printf.h"
 #include "libft.h"
 
 /*	write_address:	prints character

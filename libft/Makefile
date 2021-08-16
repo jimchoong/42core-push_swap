@@ -1,28 +1,23 @@
-NAME = libft.a
-HEADER = $(NAME:.a=.h)
-SRCS = $(filter-out $(BSRCS), $(wildcard *.c))
-BSRCS = $(wildcard *lst*.c)
-OBJS = $(SRCS:.c=.o)
-BOBJS = $(BSRCS:.c=.o)	
-CC = gcc
-CFLAGS = -c -Wall -Werror -Wextra
-RM = rm -f
-AR = ar rc
+SRCS	=	$(wildcard srcs/*.c)
+OBJS	=	${SRCS:.c=.o}
+NAME	=	libft.a
+CFLAGS	=	-Wall -Wextra -Werror
+INC_DIR =	includes
 
-all: $(NAME)
+.c.o:
+			gcc ${CFLAGS} -c -I$(INC_DIR) $< -o ${<:.c=.o}
 
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $^
+all:		${NAME}
 
-bonus: $(OBJS) $(BOBJS)
-	$(AR) $(NAME) $^
-
-%.o: %.c $(HEADER) $(CC) $(CFLAGS) $<
+$(NAME):	${OBJS}
+			ar rc ${NAME} ${OBJS}
 
 clean:
-	${RM} $(OBJS) $(BOBJS)
+			rm -f ${OBJS}
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			rm -f ${NAME}
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re
