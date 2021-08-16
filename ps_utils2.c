@@ -12,7 +12,7 @@ t_stack_e	*new_e(int val)
 	return (el);
 }
 
-static t_stack_h	*new_h(void)
+static t_stack_h	*new_h(int len)
 {
 	t_stack_h	*head;
 
@@ -23,7 +23,7 @@ static t_stack_h	*new_h(void)
 	head->btm = NULL;
 	head->is_sorted = 0;
 	head->median = 0;
-	head->len = 0;
+	head->len = len;
 	return (head);
 }
 
@@ -71,8 +71,8 @@ t_stacks	*init_stacks(int argc, char *argv[])
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
 		return (NULL);
-	stacks->a = new_h();
-	stacks->b = new_h();
+	stacks->a = new_h(argc);
+	stacks->b = new_h(0);
 	if (!stacks->a || !stacks->b)
 	{
 		free_stacks(stacks);
