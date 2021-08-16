@@ -15,15 +15,12 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		error();
 	stacks = init_stacks(--argc, ++argv);
-	ops = init_ops();
 	if (!ops || !stacks)
 	{
 		free_stacks(stacks);
-		free_ops(ops);
 		error();
 	}
-	push_swap(stacks, ops);
+	push_swap(stacks);
 	free_stacks(stacks);
-	free_ops(ops);
 	return (0);
 }

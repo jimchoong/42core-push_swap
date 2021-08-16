@@ -1,4 +1,5 @@
 #include "pushswap.h"
+#include "ps_utils.h"
 #include <stdio.h>
 
 void	print_ops(t_stacks *stacks)
@@ -6,59 +7,75 @@ void	print_ops(t_stacks *stacks)
 	ft_printf("%s", stacks->ops);
 }
 
-/*
-*	print_stacks_h: print out numbers in stack A & B
-*	params: t_stacks data
-*	return: none
-*	Notes:	1. Printing stacks horizontally due to my printf fn not having 
-*			width flag, which will cause alignment issues
-*			2. Not suitable for long stacks as horizontal length may
-*			exceed screen width, causing viewing issues
-*/
-static void	print_stacks_h(t_stacks *stacks)
+static int	count_digits(int num)
 {
-	t_stack_e	*a;
-	t_stack_e	*b;
+	int	count;
 
-	a = stacks->a->top;
-	b = stacks->b->top;
-	ft_printf("A | ");
-	while (a)
+	count = 0;
+	if (num < 0)
 	{
-		ft_printf("%i ", a->val);
-		a = a->next;
+		count++;
+		num *= -1;
 	}
-	ft_printf("\nB | ");
-	while (b)
+	if (num == 0)
+		count++;
+	else
 	{
-		ft_printf("%i ", b->val);	
-		b = b->next;
+		while (num)
+		{
+			count++;
+			num /= 10;
+		}
 	}
-	ft_printf("\n======================================\n");
+	return (count);
+}
+
+static void	print_pad(int i)
+{
+	if (i < WIDTH)
+		while (++i < WIDTH)
+			write(1, " ", sizeof(char));
+}
+
+static void	print_num(int num)
+{
+	int		i;
+	char	*pad;
+
+	i = count_digits(num);
+	ft_printf("%d", num);
+	print_pad(i);
 }
 
 /*
 *	print_stacks_h: print out numbers in stack A & B
 *	params: t_stacks data
 *	return: none
-*	Notes:	1. Uses printf instead as my ft_printf does not have width flag
-*			to maintain alignment of printed stacks
 */
 void	print_stacks(t_stacks *stacks)
 {
-	int			i;
 	t_stack_e	*a;
 	t_stack_e	*b;
 
-	i = 0;
 	a = stacks->a->top;
 	b = stacks->b->top;
-	printf("%-10c\t%-10c\n", 'A', 'B');
-	while (i++ < stacks->stack_len && a && b)
+	ft_printf("A          \tB          \n");
+	while (a || b)
 	{
-		printf("%-10i\t%-10i\n", a->val, b->val);
-		a = a->next;
-		b = b->next;
+		if (a)
+		{
+			print_num(a->val);
+			a = a->next;
+		}
+		else
+			print_pad(0);
+		ft_printf("\t");
+		if (b)
+		{
+			print_num(b->val);
+			b = b->next;
+		}
+		ft_printf("\n");
 	}
-	printf("==================\n");
+	ft_printf("==========================\n");
 }

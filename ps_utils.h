@@ -4,6 +4,7 @@
 # include "libft/libft.h"
 # include "pushswap.h"
 # include <stdlib.h>
+# define WIDTH 11
 
 int			verify_input(int argc, char *argv[]);
 t_stack_e	*new_e(int val);
