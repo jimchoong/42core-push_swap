@@ -1,5 +1,6 @@
 #include "ps_utils.h"
 #include "pushswap.h"
+#include "libft.h"
 
 static int	verify_unique(int argc, char *argv[])
 {

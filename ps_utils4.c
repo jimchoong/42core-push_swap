@@ -1,6 +1,6 @@
 #include "pushswap.h"
 #include "ps_utils.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
 void	print_ops(t_stacks *stacks)
 {

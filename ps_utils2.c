@@ -1,6 +1,6 @@
 #include "ps_utils.h"
 
-static t_stack_e	*new_e(int val)
+t_stack_e	*new_e(int val)
 {
 	t_stack_e	*el;
 
@@ -27,7 +27,7 @@ static t_stack_h	*new_h(void)
 	return (head);
 }
 
-static void	append_back(t_stack_h *head, t_stack_e *new)
+void	append_back(t_stack_h *head, t_stack_e *new)
 {
 	t_stack_e	*tmp;
 

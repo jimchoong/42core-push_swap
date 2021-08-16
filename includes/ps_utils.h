@@ -1,7 +1,7 @@
 #ifndef PS_UTILS_H
 # define PS_UTILS_H
 # include <limits.h>
-# include "libft/libft.h"
+# include "libft.h"
 # include "pushswap.h"
 # include <stdlib.h>
 # define WIDTH 11

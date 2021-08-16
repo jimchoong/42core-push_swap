@@ -7,7 +7,6 @@ typedef struct s_stack_e
 {
 	struct s_stack_e	*next;
 	int					val;
-	int					is_filled;
 }	t_stack_e;
 
 // structure for stack header

@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "ps_utils.h"
 
 static void	free_stack(t_stack_h *head)
