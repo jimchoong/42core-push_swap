@@ -9,7 +9,7 @@ int	sa(t_stacks *stacks)
 	tmp = stacks->a->top->val;
 	stacks->a->top->val = stacks->a->top->next->val;
 	stacks->a->top->next->val = tmp;
-	return (1);
+	return (add_op(stacks, "sa"));
 }
 
 int	sb(t_stacks *stacks)
@@ -21,7 +21,7 @@ int	sb(t_stacks *stacks)
 	tmp = stacks->b->top->val;
 	stacks->b->top->val = stacks->b->top->next->val;
 	stacks->b->top->next->val = tmp;
-	return (1);
+	return (add_op(stacks, "sb"));
 }
 
 int	ss(t_stacks *stacks)
@@ -34,8 +34,11 @@ int	ss(t_stacks *stacks)
 		return (0);
 	b = sb(stacks);
 	if (!b)
+	{
 		sa(stacks);
-	return (a * b);
+		return (0);
+	}
+	return (add_op(stacks, "ss"));
 }
 
 int	pa(t_stacks *stacks)
@@ -52,7 +55,9 @@ int	pa(t_stacks *stacks)
 	if (!stacks->a->top)
 		stacks->a->btm = tmp_b;
 	stacks->a->top = tmp_b;
-	return (1);
+	stacks->a->len += 1;
+	stacks->b->len -= 1;
+	return (add_op(stacks, "pa"));
 }
 
 int	pb(t_stacks *stacks)
@@ -69,5 +74,7 @@ int	pb(t_stacks *stacks)
 	if (!stacks->b->top)
 		stacks->b->btm = tmp_a;
 	stacks->b->top = tmp_a;
-	return (1);
+	stacks->b->len += 1;
+	stacks->a->len -= 1;
+	return (add_op(stacks, "pb"));
 }

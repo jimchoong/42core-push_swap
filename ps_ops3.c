@@ -12,8 +12,11 @@ int	rr(t_stacks *stacks)
 		return (0);
 	b = rb(stacks);
 	if (!b)
+	{
 		rra(stacks);
-	return (a * b);
+		return (0);
+	}
+	return (add_op(stacks, "rr"));
 }
 
 // add operation to string of operations done

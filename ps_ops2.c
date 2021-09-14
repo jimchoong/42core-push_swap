@@ -13,7 +13,7 @@ int	ra(t_stacks *stacks)
 	stacks->a->btm->next = tmp;
 	stacks->a->btm = tmp;
 	tmp->next = NULL;
-	return (1);
+	return (add_op(stacks, "ra"));
 }
 
 int	rb(t_stacks *stacks)
@@ -29,7 +29,7 @@ int	rb(t_stacks *stacks)
 	stacks->b->btm->next = tmp;
 	stacks->b->btm = tmp;
 	tmp->next = NULL;
-	return (1);
+	return (add_op(stacks, "rb"));
 }
 
 int	rra(t_stacks *stacks)
@@ -55,7 +55,7 @@ int	rra(t_stacks *stacks)
 	tmp->next = stacks->a->top;
 	stacks->a->top = tmp;
 	stacks->a->btm = trav;
-	return (1);
+	return (add_op(stacks, "rra"));
 }
 
 int	rrb(t_stacks *stacks)
@@ -81,7 +81,7 @@ int	rrb(t_stacks *stacks)
 	tmp->next = stacks->b->top;
 	stacks->b->top = tmp;
 	stacks->b->btm = trav;
-	return (1);
+	return (add_op(stacks, "rrb"));
 }
 
 int	rrr(t_stacks *stacks)
@@ -94,6 +94,9 @@ int	rrr(t_stacks *stacks)
 		return (0);
 	b = rrb(stacks);
 	if (!b)
+	{
 		ra(stacks);
-	return (a * b);
+		return (0);
+	}
+	return (add_op(stacks, "rrr"));
 }
